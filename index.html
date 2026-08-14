@@ -64,14 +64,16 @@ header.dark{border-color:var(--line)}
 .btn.full{width:100%}
 .hero .scrollc{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#eee;font-size:10px;letter-spacing:.26em;text-transform:uppercase}
 /* ---------- GENDER ---------- */
-.gender{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px}
-.gblk{position:relative;overflow:hidden;height:88vh;min-height:560px;cursor:pointer}
-.gblk img{width:100%;height:100%;object-fit:cover;transition:transform 1s ease;filter:brightness(.82)}
-.gblk:hover img{transform:scale(1.06)}
-.gblk .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center}
-.gblk .c h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,4.4vw,74px);letter-spacing:.06em;text-shadow:0 2px 26px rgba(0,0,0,.4)}
-.gblk .c .go{margin-top:16px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:5px;transform:translateY(6px);opacity:.9;transition:.4s}
-.gblk:hover .c .go{transform:none;opacity:1}
+.gender{display:grid;grid-template-columns:1fr 1fr;gap:34px 26px;padding:46px 26px 20px}
+.gblk{cursor:pointer}
+.gblk .gimg{position:relative;overflow:hidden;height:72vh;min-height:520px;background:var(--soft)}
+.gblk .gimg img{width:100%;height:100%;object-fit:cover;transition:transform 1s ease}
+.gblk:hover .gimg img{transform:scale(1.05)}
+.gcap{text-align:center;padding:20px 0 4px}
+.gcap .k{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--sub);margin-bottom:7px}
+.gcap h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(26px,2.4vw,40px);letter-spacing:.04em}
+.gcap .go{display:inline-block;margin-top:9px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:4px;transition:.3s}
+.gcap .go:hover{color:var(--sub);border-color:var(--sub)}
 /* ---------- SECTION HEAD ---------- */
 .shead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
 .shead .k{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--sub)}
@@ -257,8 +259,8 @@ footer .col a{display:block;color:var(--sub);padding:5px 0}footer .col a:hover{c
  header .tools .txt{display:none}
  header .bar{grid-template-columns:auto 1fr auto}
  header .logo{font-size:20px}
- .gender{grid-template-columns:1fr;gap:2px}
- .gblk{height:100vh;height:100svh;min-height:0}
+ .gender{grid-template-columns:1fr;gap:30px;padding:26px 20px 10px}
+ .gblk .gimg{height:80vh;min-height:0}
  .pd .layout{grid-template-columns:1fr;gap:0}
  .pinfo{position:static;padding:26px 0 40px}
  .gallery{display:block;position:relative}
@@ -313,8 +315,8 @@ footer .col a{display:block;color:var(--sub);padding:5px 0}footer .col a:hover{c
  </section>
 
  <section class="gender">
-  <div class="gblk fade" onclick="go('gender','h')"><img src="https://yhassir.com/archivos/configuracion/29-imagen-hombre-banner.1782152164.png" alt="Hombre"><div class="c"><h2 class="serif">Hombre</h2><span class="go">Descubrir colección</span></div></div>
-  <div class="gblk fade" onclick="go('gender','m')"><img src="https://yhassir.com/archivos/configuracion/30-imagen-mujer-banner.1782152179.png" alt="Mujer"><div class="c"><h2 class="serif">Mujer</h2><span class="go">Descubrir colección</span></div></div>
+  <div class="gblk fade" onclick="go('gender','h')"><div class="gimg"><img src="https://yhassir.com/archivos/configuracion/29-imagen-hombre-banner.1782152164.png" alt="Hombre"></div><div class="gcap"><div class="k">Colección</div><h2 class="serif">Hombre</h2><span class="go">Descubrir colección →</span></div></div>
+  <div class="gblk fade" onclick="go('gender','m')"><div class="gimg"><img src="https://yhassir.com/archivos/configuracion/30-imagen-mujer-banner.1782152179.png" alt="Mujer"></div><div class="gcap"><div class="k">Colección</div><h2 class="serif">Mujer</h2><span class="go">Descubrir colección →</span></div></div>
  </section>
 
  <section class="block wrap" id="newinSec">
