@@ -226,6 +226,22 @@ section.block{padding:82px 0}
 .mmenu nav .sub a{font-family:'Jost';font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);padding:11px 0;border:0}
 .mmenu .mfoot{padding:20px 24px;border-top:1px solid var(--line);display:flex;gap:20px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)}
 /* ---------- NEWSLETTER ---------- */
+.season{padding:70px 0 96px;overflow:hidden}
+.seasonhead{text-align:center;margin:0 0 42px;padding:0 24px}
+.seasonhead .k{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--sub);margin-bottom:12px}
+.seasonhead h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3vw,40px);letter-spacing:.06em;text-transform:uppercase}
+.seasonwrap{position:relative}
+.seasontrack{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:0 26px}
+.seasontrack::-webkit-scrollbar{display:none}
+.scard{flex:0 0 clamp(300px,40vw,520px);scroll-snap-align:center;cursor:pointer}
+.scard .sim{position:relative;overflow:hidden;height:76vh;min-height:560px;background:var(--soft)}
+.scard .sim img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s ease}
+.scard:hover .sim img{transform:scale(1.05)}
+.scard .slab{display:flex;align-items:center;gap:12px;padding:16px 2px 0}
+.scard .slab span{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.scard .slab i{font-style:normal;font-size:12px;letter-spacing:.06em;color:var(--sub);opacity:0;transform:translateX(-6px);transition:.4s ease}
+.scard:hover .slab i{opacity:1;transform:none}
+.seasonwrap .arw{top:calc(38% - 23px)}
 .news{background:var(--ink);color:#fff;text-align:center;padding:84px 28px}
 .news .k{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#b9b3a6}
 .news h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(26px,3.4vw,42px);margin:12px 0 8px;max-width:20ch;margin-inline:auto}
@@ -271,6 +287,11 @@ footer .col a{display:block;color:var(--sub);padding:5px 0}footer .col a:hover{c
  .galdots i.on{background:var(--ink)}
  .pgrid{grid-template-columns:repeat(2,1fr);gap:24px 14px}
  .search .res{grid-template-columns:repeat(2,1fr)}
+ .season{padding:48px 0 66px}
+ .seasontrack{gap:14px;padding:0 18px}
+ .scard{flex:0 0 82vw}
+ .scard .sim{height:66vh;min-height:0}
+ .scard .slab i{opacity:1;transform:none}
  .arw{display:none}
  .caro .pcard{flex:0 0 82vw}
  .fgrid{grid-template-columns:1fr 1fr}
@@ -333,6 +354,21 @@ footer .col a{display:block;color:var(--sub);padding:5px 0}footer .col a:hover{c
   <div class="fade" style="display:grid;grid-template-columns:2fr 1fr;gap:2px;min-height:60vh">
     <div style="position:relative;overflow:hidden"><img src="https://yhassir.com/archivos/productoImagen/1146-pantaln-gurkha-lyon.1769204065.webp" style="width:100%;height:100%;object-fit:cover" alt=""></div>
     <div style="background:var(--soft);display:flex;flex-direction:column;justify-content:center;padding:8%"><div class="k" style="font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--sub)">La marca</div><h3 class="serif" style="font-size:clamp(24px,2.4vw,34px);margin:12px 0;font-weight:500">Más de 25 años vistiendo carácter</h3><p style="color:#5a564e;max-width:40ch">Moda peruana de autor para hombre y mujer. Prendas con alma, hechas para acompañar tu historia.</p><a class="btn dark" style="margin-top:24px;align-self:flex-start" onclick="go('gender','m')">Conocer más →</a></div>
+  </div>
+ </section>
+ <section class="season">
+  <div class="seasonhead fade"><div class="k">Otoño · Invierno 2026</div><h2>Creaciones de temporada</h2></div>
+  <div class="seasonwrap fade">
+   <button class="arw l" onclick="scrollC('caroSeason',-1)">‹</button>
+   <div class="seasontrack" id="caroSeason">
+   <div class="scard fade" onclick="go('gender','m')"><div class="sim"><img src="https://yhassir.com/archivos/configuracion/30-imagen-mujer-banner.1782152179.png" alt="Mujer"></div><div class="slab"><span>Mujer</span><i>Ver colección →</i></div></div>
+   <div class="scard fade" onclick="go('gender','h')"><div class="sim"><img src="https://yhassir.com/archivos/configuracion/29-imagen-hombre-banner.1782152164.png" alt="Hombre"></div><div class="slab"><span>Hombre</span><i>Ver colección →</i></div></div>
+   <div class="scard fade" onclick="go('gender','m')"><div class="sim"><img src="https://yhassir.com/archivos/productoImagen/1549-vestido-anilu.1769817487.webp" alt="Mujer"></div><div class="slab"><span>Mujer</span><i>Ver colección →</i></div></div>
+   <div class="scard fade" onclick="go('gender','h')"><div class="sim"><img src="https://yhassir.com/archivos/productoImagen/1146-pantaln-gurkha-lyon.1769204065.webp" alt="Hombre"></div><div class="slab"><span>Hombre</span><i>Ver colección →</i></div></div>
+   <div class="scard fade" onclick="go('gender','m')"><div class="sim"><img src="https://yhassir.com/archivos/productoImagen/1640-blazer-karol-ml-catania-ce.1770930399.webp" alt="Mujer"></div><div class="slab"><span>Mujer</span><i>Ver colección →</i></div></div>
+   <div class="scard fade" onclick="go('gender','h')"><div class="sim"><img src="https://yhassir.com/archivos/productoImagen/1546-camisa-byron.1769611599.webp" alt="Hombre"></div><div class="slab"><span>Hombre</span><i>Ver colección →</i></div></div>
+   </div>
+   <button class="arw r" onclick="scrollC('caroSeason',1)">›</button>
   </div>
  </section>
 </main>
