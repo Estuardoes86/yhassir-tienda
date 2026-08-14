@@ -100,7 +100,7 @@ section.block{padding:82px 0}
 /* carousel */
 .caro{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:4px}
 .caro::-webkit-scrollbar{display:none}
-.caro .pcard{flex:0 0 300px;scroll-snap-align:start}
+.caro .pcard{flex:0 0 344px;scroll-snap-align:start}
 .carowrap{position:relative}
 .arw{position:absolute;top:calc(50% - 44px);width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid var(--line);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:3;box-shadow:0 8px 24px rgba(0,0,0,.08);transition:.2s}
 .arw:hover{background:#111;color:#fff;border-color:#111}
@@ -234,17 +234,17 @@ section.block{padding:82px 0}
 .news button{background:none;border:0;color:#fff;font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;padding:0 6px}
 .news button:hover{color:#cfc7b6}
 /* ---------- FOOTER ---------- */
-footer{background:#0e0e0d;color:#a7a196;font-size:13px;padding:64px 0 30px}
+footer{background:#faf9f7;color:#6f6b64;font-size:13px;padding:64px 0 30px;border-top:1px solid var(--line)}
 .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}
-footer .brand h4{font-family:'Cormorant Garamond',serif;color:#f2efe8;font-size:24px;letter-spacing:.32em;margin-bottom:14px}
-footer .brand p{max-width:30ch;color:#8b857a}
-footer .col b{display:block;color:#f2efe8;font-weight:400;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
-footer .col a{display:block;color:#a7a196;padding:5px 0}footer .col a:hover{color:#f2efe8}
+footer .brand h4{font-family:'Cormorant Garamond',serif;color:var(--ink);font-size:24px;letter-spacing:.32em;margin-bottom:14px}
+footer .brand p{max-width:30ch;color:var(--sub)}
+footer .col b{display:block;color:var(--ink);font-weight:400;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
+footer .col a{display:block;color:var(--sub);padding:5px 0}footer .col a:hover{color:var(--ink)}
 .social{display:flex;gap:14px;margin-top:8px}
-.social a{border:1px solid #2c2b28;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
-.social a:hover{border-color:#f2efe8}
+.social a{border:1px solid var(--line);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
+.social a:hover{border-color:var(--ink)}
 .social svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.3}
-.fbot{border-top:1px solid #26251f;margin-top:40px;padding-top:18px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.08em;color:#6f6a60;flex-wrap:wrap;gap:8px}
+.fbot{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.08em;color:var(--sub);flex-wrap:wrap;gap:8px}
 .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:#111;color:#fff;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:14px 24px;opacity:0;pointer-events:none;transition:.3s;z-index:90}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 /* ---------- RESPONSIVE ---------- */
@@ -258,7 +258,7 @@ footer .col a{display:block;color:#a7a196;padding:5px 0}footer .col a:hover{colo
  header .bar{grid-template-columns:auto 1fr auto}
  header .logo{font-size:20px}
  .gender{grid-template-columns:1fr;gap:2px}
- .gblk{height:74vh;min-height:460px}
+ .gblk{height:100vh;height:100svh;min-height:0}
  .pd .layout{grid-template-columns:1fr;gap:0}
  .pinfo{position:static;padding:26px 0 40px}
  .gallery{display:block;position:relative}
@@ -270,7 +270,7 @@ footer .col a{display:block;color:#a7a196;padding:5px 0}footer .col a:hover{colo
  .pgrid{grid-template-columns:repeat(2,1fr);gap:24px 14px}
  .search .res{grid-template-columns:repeat(2,1fr)}
  .arw{display:none}
- .caro .pcard{flex:0 0 72vw}
+ .caro .pcard{flex:0 0 82vw}
  .fgrid{grid-template-columns:1fr 1fr}
  section.block{padding:58px 0}
  .wrap{padding:0 20px}
@@ -288,7 +288,7 @@ footer .col a{display:block;color:#a7a196;padding:5px 0}footer .col a:hover{colo
   <nav class="mainnav">
     <a onmouseenter="mega('h')" onmouseleave="megaHide()" onclick="go('gender','h')">Hombre</a>
     <a onmouseenter="mega('m')" onmouseleave="megaHide()" onclick="go('gender','m')">Mujer</a>
-    <a onclick="go('newin')">New In</a>
+    <a onclick="go('newin')">New</a>
     <a onclick="go('gender','h')">Colecciones</a>
   </nav>
   <div class="tools">
@@ -309,7 +309,7 @@ footer .col a{display:block;color:#a7a196;padding:5px 0}footer .col a:hover{colo
    <h1 class="serif">Sé el protagonista de tu historia</h1>
    <div class="cta"><a class="btn ghost" onclick="go('newin')">Ver catálogo →</a></div>
   </div>
-  <div class="scrollc">Desliza para descubrir ↓</div>
+  
  </section>
 
  <section class="gender">
@@ -318,7 +318,7 @@ footer .col a{display:block;color:#a7a196;padding:5px 0}footer .col a:hover{colo
  </section>
 
  <section class="block wrap" id="newinSec">
-  <div class="shead fade"><div><div class="k">Novedades</div><h2 class="serif">New In</h2></div><a class="link" onclick="go('newin')">Ver todo</a></div>
+  <div class="shead fade"><div><div class="k">Novedades</div><h2 class="serif">New</h2></div><a class="link" onclick="go('newin')">Ver todo</a></div>
   <div class="carowrap fade">
    <button class="arw l" onclick="scrollC('caroNew',-1)">‹</button>
    <div class="caro" id="caroNew"></div>
@@ -398,7 +398,7 @@ footer .col a{display:block;color:#a7a196;padding:5px 0}footer .col a:hover{colo
          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8a1 1 0 0 1 1-1z"/></svg></a>
        </div>
      </div>
-     <div class="col"><b>Comprar</b><a onclick="go('gender','h')">Hombre</a><a onclick="go('gender','m')">Mujer</a><a onclick="go('newin')">New In</a></div>
+     <div class="col"><b>Comprar</b><a onclick="go('gender','h')">Hombre</a><a onclick="go('gender','m')">Mujer</a><a onclick="go('newin')">New</a></div>
      <div class="col"><b>Información</b><a href="#">Nosotros</a><a href="#">Contacto</a><a href="#">Envíos</a><a href="#">Cambios y devoluciones</a><a href="#">Preguntas frecuentes</a></div>
      <div class="col"><b>Legal</b><a href="#">Términos y condiciones</a><a href="#">Política de privacidad</a><a href="https://wa.link/e64wf6">WhatsApp</a></div>
    </div>
@@ -421,7 +421,7 @@ footer .col a{display:block;color:#a7a196;padding:5px 0}footer .col a:hover{colo
    <h5>Búsquedas populares</h5>
    <a onclick="qsearch('Camisa')">Camisa</a><a onclick="qsearch('Blazer')">Blazer</a><a onclick="qsearch('Vestido')">Vestido</a><a onclick="qsearch('Pantalón')">Pantalón</a>
    <h5 style="margin-top:22px">Explorar</h5>
-   <a onclick="closeSearch();go('gender','h')">Hombre</a><a onclick="closeSearch();go('gender','m')">Mujer</a><a onclick="closeSearch();go('newin')">New In</a>
+   <a onclick="closeSearch();go('gender','h')">Hombre</a><a onclick="closeSearch();go('gender','m')">Mujer</a><a onclick="closeSearch();go('newin')">New</a>
  </div>
  <div class="res" id="searchRes"></div>
 </div>
@@ -431,7 +431,7 @@ footer .col a{display:block;color:#a7a196;padding:5px 0}footer .col a:hover{colo
  <nav>
    <a onclick="closeMenu();go('gender','h')">Hombre</a>
    <a onclick="closeMenu();go('gender','m')">Mujer</a>
-   <a onclick="closeMenu();go('newin')">New In</a>
+   <a onclick="closeMenu();go('newin')">New</a>
    <a onclick="closeMenu();go('gender','h')">Colecciones</a>
    <div class="sub" style="margin-top:10px"><a onclick="closeMenu();openSearch()">Buscar</a><a href="#">Mi cuenta</a><a onclick="closeMenu();openCart()">Carrito</a></div>
  </nav>
@@ -511,7 +511,7 @@ function renderShop(g,cat){
  document.getElementById('sbKick').textContent='Colección '+(g==='h'?'masculina':'femenina');
  // category track
  var cats=catsFor(g);
- var track='<div class="ccard '+(!cat?'on':'')+'" onclick="pickCat(\''+g+'\',null)"><div class="im"><img src="'+LIFE[g==='h'?0:1]+'" alt="New In"></div><span>New In</span></div>';
+ var track='<div class="ccard '+(!cat?'on':'')+'" onclick="pickCat(\''+g+'\',null)"><div class="im"><img src="'+LIFE[g==='h'?0:1]+'" alt="New In"></div><span>New</span></div>';
  track+=cats.map(c=>'<div class="ccard '+(cat===c?'on':'')+'" onclick="pickCat(\''+g+'\',\''+c+'\')"><div class="im"><img src="'+firstImg(g,c)+'" alt="'+c+'"></div><span>'+c+'</span></div>').join('');
  document.getElementById('catTrack').innerHTML=track;
  // filters options
@@ -621,8 +621,8 @@ var megaT;
 function mega(g){clearTimeout(megaT);if(window.innerWidth<901)return;var cats=catsFor(g);var t=g==='h'?'Hombre':'Mujer';
  document.getElementById('megaInner').innerHTML=
    '<div><h4>Categorías</h4>'+cats.map(c=>'<a onclick="go(\'gender\',\''+g+'\');setTimeout(()=>pickCatDirect(\''+g+'\',\''+c+'\'),60)">'+c+'</a>').join('')+'<a onclick="go(\'gender\',\''+g+'\')">Ver todo</a></div>'
-  +'<div><h4>Destacados</h4><a onclick="go(\'newin\')">New In</a><a onclick="go(\'gender\',\''+g+'\')">Lo más vendido</a><a onclick="go(\'gender\',\''+g+'\')">Rebajas</a></div>'
-  +'<div class="edi"><figure onclick="go(\'gender\',\''+g+'\')"><img src="'+LIFE[g==='h'?0:1]+'"><figcaption>'+t+'</figcaption></figure><figure onclick="go(\'newin\')"><img src="'+(g==='h'?P[0].img:P[8].img)+'"><figcaption>New In</figcaption></figure></div>';
+  +'<div><h4>Destacados</h4><a onclick="go(\'newin\')">New</a><a onclick="go(\'gender\',\''+g+'\')">Lo más vendido</a><a onclick="go(\'gender\',\''+g+'\')">Rebajas</a></div>'
+  +'<div class="edi"><figure onclick="go(\'gender\',\''+g+'\')"><img src="'+LIFE[g==='h'?0:1]+'"><figcaption>'+t+'</figcaption></figure><figure onclick="go(\'newin\')"><img src="'+(g==='h'?P[0].img:P[8].img)+'"><figcaption>New</figcaption></figure></div>';
  document.getElementById('megaEl').classList.add('open');
 }
 function megaKeep(){clearTimeout(megaT);}
