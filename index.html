@@ -275,8 +275,11 @@ footer .col a{display:block;color:var(--sub);padding:5px 0}footer .col a:hover{c
  header .tools .txt{display:none}
  header .bar{grid-template-columns:auto 1fr auto}
  header .logo{font-size:20px}
- .gender{grid-template-columns:1fr;gap:30px;padding:26px 20px 10px}
- .gblk .gimg{height:80vh;min-height:0}
+ html{scroll-snap-type:y proximity}
+ .gender{grid-template-columns:1fr;gap:0;padding:0}
+ .gblk{display:flex;flex-direction:column;min-height:calc(100vh - 56px);min-height:calc(100svh - 56px);scroll-snap-align:start;scroll-margin-top:56px;padding-bottom:14px}
+ .gcap{order:-1;padding:16px 0 14px}
+ .gblk .gimg{flex:1;height:auto;min-height:0}
  .pd .layout{grid-template-columns:1fr;gap:0}
  .pinfo{position:static;padding:26px 0 40px}
  .gallery{display:block;position:relative}
