@@ -96,7 +96,9 @@ section.block{padding:82px 0}
 .pcard .meta .pr{margin-top:5px;font-size:13px}
 .pcard .meta .pr b{font-weight:500}.pcard .meta .pr s{color:var(--sub);margin-left:7px;font-size:12px}
 .pcard .sw{display:flex;gap:6px;margin-top:9px}
-.pcard .sw i{width:12px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
+.pcard .sw .cw{position:relative;width:30px;height:40px;overflow:hidden;border:1px solid var(--line);background:var(--soft)}
+.pcard .sw .cw img{width:100%;height:calc(100% - 5px);object-fit:cover;display:block}
+.pcard .sw .cw .bar{position:absolute;bottom:0;left:0;width:100%;height:5px}
 .skel{position:absolute;inset:0;background:linear-gradient(100deg,#efedea 30%,#f7f6f4 50%,#efedea 70%);background-size:200% 100%;animation:sh 1.3s infinite}
 @keyframes sh{from{background-position:200% 0}to{background-position:-200% 0}}
 /* carousel */
@@ -157,9 +159,11 @@ section.block{padding:82px 0}
 .pinfo .price{font-size:20px;letter-spacing:.02em}.pinfo .price s{color:var(--sub);font-size:15px;margin-left:10px}
 .pinfo .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:26px 0 12px;display:flex;justify-content:space-between;align-items:center}
 .pinfo .lbl a{font-size:10.5px;color:var(--sub);border-bottom:1px solid var(--line)}
-.swatches{display:flex;gap:12px}
-.swatches .c{width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,0,0,.2);cursor:pointer;transition:.15s}
-.swatches .c.on{box-shadow:0 0 0 2px #fff,0 0 0 3px var(--ink)}
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.swatches .c{position:relative;width:54px;height:70px;overflow:hidden;border:1px solid var(--line);cursor:pointer;background:var(--soft);transition:.15s}
+.swatches .c img{width:100%;height:calc(100% - 8px);object-fit:cover;display:block}
+.swatches .c .bar{position:absolute;bottom:0;left:0;width:100%;height:8px}
+.swatches .c.on{outline:2px solid var(--ink);outline-offset:1px;border-color:var(--ink)}
 .sizes{display:flex;gap:8px;flex-wrap:wrap}
 .sizes button{min-width:52px;height:48px;border:1px solid var(--line);background:#fff;font-size:13px;letter-spacing:.06em;cursor:pointer;transition:.15s;position:relative}
 .sizes button:hover:not(:disabled){border-color:var(--ink)}
@@ -275,6 +279,7 @@ footer .col a{display:block;color:var(--sub);padding:5px 0}footer .col a:hover{c
  header .tools .txt{display:none}
  header .bar{grid-template-columns:auto 1fr auto}
  header .logo{font-size:20px}
+ .hero{margin:0 14px}
  html{scroll-snap-type:y proximity}
  .gender{grid-template-columns:1fr;gap:0;padding:0}
  .gblk{display:flex;flex-direction:column;min-height:calc(100vh - 56px);min-height:calc(100svh - 56px);scroll-snap-align:start;scroll-margin-top:56px;padding:0 18px 22px}
@@ -291,9 +296,10 @@ footer .col a{display:block;color:var(--sub);padding:5px 0}footer .col a:hover{c
  .pgrid{grid-template-columns:repeat(2,1fr);gap:24px 14px}
  .search .res{grid-template-columns:repeat(2,1fr)}
  .season{padding:48px 0 66px}
- .seasontrack{gap:14px;padding:0 18px}
- .scard{flex:0 0 82vw}
- .scard .sim{height:66vh;min-height:0}
+ .seasontrack{gap:0;padding:0}
+ .scard{flex:0 0 100vw;scroll-snap-align:center}
+ .scard .sim{height:64vh;min-height:0;margin:0 18px}
+ .scard .slab{padding:16px 20px 0}
  .scard .slab i{opacity:1;transform:none}
  .arw{display:none}
  .caro .pcard{flex:0 0 88vw}
@@ -343,14 +349,7 @@ footer .col a{display:block;color:var(--sub);padding:5px 0}footer .col a:hover{c
   <div class="gblk fade" onclick="go('gender','m')"><div class="gimg"><img src="https://yhassir.com/archivos/configuracion/30-imagen-mujer-banner.1782152179.png" alt="Mujer"></div><div class="gcap"><div class="k">Colección</div><h2 class="serif">Mujer</h2><span class="go">Descubrir colección →</span></div></div>
  </section>
 
- <section class="block wrap" id="newinSec">
-  <div class="shead fade"><div><div class="k">Novedades</div><h2 class="serif">New</h2></div><a class="link" onclick="go('newin')">Ver todo</a></div>
-  <div class="carowrap fade">
-   <button class="arw l" onclick="scrollC('caroNew',-1)">‹</button>
-   <div class="caro" id="caroNew"></div>
-   <button class="arw r" onclick="scrollC('caroNew',1)">›</button>
-  </div>
- </section>
+ 
 
  
  <section class="season">
@@ -506,7 +505,7 @@ function money(n){return 'S/ '+Number(n).toFixed(2);}
 /* ============ PRODUCT CARD ============ */
 function pcard(p){
  var g=gallery(p);
- var sw=p.colors.map(c=>'<i style="background:'+c[1]+'"></i>').join('');
+ var sw=p.colors.map(c=>'<span class="cw" title="'+c[0]+'"><img src="'+p.img+'" alt="'+c[0]+'" loading="lazy"><i class="bar" style="background:'+c[1]+'"></i></span>').join('');
  var off=Math.round((1-p.price/p.old)*100);
  return '<div class="pcard" onclick="go(\'product\',\''+p.slug+'\')">'
   +'<div class="imgwrap"><div class="skel"></div>'
@@ -524,14 +523,14 @@ function showView(id){VIEWS.forEach(v=>document.getElementById(v).style.display=
 function go(view,arg){
  closeAll();
  if(view==='home'){showView('homeView');headerMode();window.scrollTo(0,0);}
- else if(view==='newin'){showView('homeView');headerMode();document.getElementById('newinSec').scrollIntoView({behavior:'smooth'});}
+ else if(view==='newin'){showView('homeView');headerMode();var _s=document.querySelector('.season');if(_s)_s.scrollIntoView({behavior:'smooth'});}
  else if(view==='gender'){renderShop(arg,null);showView('shopView');headerSolid();window.scrollTo(0,0);}
  else if(view==='product'){renderProduct(arg);showView('prodView');headerSolid();window.scrollTo(0,0);}
  observeFades();
 }
 
 /* ============ NEW IN carousel ============ */
-document.getElementById('caroNew').innerHTML=P.map(pcard).join('');
+var _cn=document.getElementById('caroNew');if(_cn)_cn.innerHTML=P.map(pcard).join('');
 function scrollC(id,d){document.getElementById(id).scrollBy({left:d*640,behavior:'smooth'});}
 
 /* ============ SHOP ============ */
@@ -586,7 +585,7 @@ function renderProduct(slug){
  document.getElementById('pdCrumb').innerHTML='<a onclick="go(\'home\')">Inicio</a> / <a onclick="go(\'gender\',\''+p.g+'\')">'+(p.g==='h'?'Hombre':'Mujer')+'</a> / '+p.cat;
  document.getElementById('pdGallery').innerHTML=g.map((s,k)=>'<div class="g '+(k===0?'act':'')+'"><img src="'+s+'" alt="'+p.name+' '+(k+1)+'"></div>').join('');
  document.getElementById('pdDots').innerHTML=g.map((s,k)=>'<i class="'+(k===0?'on':'')+'" onclick="galSlide('+k+')"></i>').join('');
- var sw=p.colors.map((c,k)=>'<span class="c'+(k===0?' on':'')+'" style="background:'+c[1]+'" title="'+c[0]+'" onclick="pdColor('+k+')"></span>').join('');
+ var sw=p.colors.map((c,k)=>'<span class="c'+(k===0?' on':'')+'" title="'+c[0]+'" onclick="pdColor('+k+')"><img src="'+p.img+'" alt="'+c[0]+'"><i class="bar" style="background:'+c[1]+'"></i></span>').join('');
  var sz=p.sizes.map(s=>'<button '+(s[1]?'':'disabled')+' onclick="pdSize(this,\''+s[0]+'\')">'+s[0]+'</button>').join('');
  var off=Math.round((1-p.price/p.old)*100);
  document.getElementById('pdInfo').innerHTML=
