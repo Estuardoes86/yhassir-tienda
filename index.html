@@ -322,6 +322,27 @@ footer .fbot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
  .search .res{grid-template-columns:1fr 1fr}
 }
 @media(max-width:520px){.pgrid{grid-template-columns:1fr 1fr;gap:20px 12px}footer .fgrid{grid-template-columns:1fr}}
+/* ===== PRESENTACIÓN (ver toda la web) ===== */
+.seeall{position:fixed;right:18px;bottom:18px;z-index:80;background:var(--ink);color:#fff;border:0;border-radius:40px;padding:13px 20px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.22);display:flex;gap:8px;align-items:center}
+.presentwrap{position:fixed;inset:0;background:#e9e7e2;z-index:200;overflow-y:auto}
+.presentwrap .pbar{position:sticky;top:0;background:var(--ink);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:13px 24px;z-index:5}
+.presentwrap .pbar .lg{font-family:var(--serif);letter-spacing:.3em;font-size:17px}
+.presentwrap .pbar a{color:#fff;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.45);padding:8px 15px;border-radius:30px}
+.psec{max-width:1180px;margin:36px auto;padding:0 20px}
+.psec .lab{margin-bottom:12px}
+.psec .lab .n{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8a857c}
+.psec .lab b{display:block;color:var(--ink);font-family:var(--serif);font-size:23px;font-weight:500;margin-top:2px}
+.frame{background:#fff;border:1px solid #d8d5cf;border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.08)}
+.frame .chrome{height:34px;background:#f2f0ec;border-bottom:1px solid #e1ded8;display:flex;align-items:center;gap:6px;padding:0 14px}
+.frame .chrome i{width:10px;height:10px;border-radius:50%;background:#cfccc5}
+.frame iframe{width:100%;border:0;display:block}
+.pmob{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+.pmob .phone{width:300px;flex:0 0 auto}
+.pmob .phone .frame{border-radius:22px}
+.pmob .phone .lab{text-align:center}
+body.presenting .seeall{display:none}
+body.inframe .hero{height:600px;min-height:0}
+body.inframe .seeall{display:none}
 </style></head>
 <body>
 <header id="hdr" class="trans">
@@ -387,6 +408,7 @@ footer .fbot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
  <div class="gtabs"><button id="mtM" class="on" onclick="mMenuGender('m')">Mujer</button><button id="mtH" onclick="mMenuGender('h')">Hombre</button></div>
  <nav id="mmNav"></nav>
 </div>
+<button class="seeall" id="seeall" onclick="location.hash='#present'">▤ Ver toda la web</button>
 <div class="toast" id="toast"></div>
 <script>
 var CL=['XS','S','M','L','XL'], PN=['30','32','34','36'];
@@ -705,6 +727,58 @@ function go(view,arg){
 function onScroll(){var h=document.getElementById('hdr');if(!document.getElementById('homeView').hidden){if(window.scrollY>window.innerHeight-90)h.classList.remove('trans');else h.classList.add('trans');}}
 window.addEventListener('scroll',onScroll,{passive:true});
 
+/* ---------- PRESENTACIÓN (toda la web en un scroll) ---------- */
+function seedDemo(){if(CART.length)return;CART=[{slug:'vestido-anilu',color:'Negro',size:'M',qty:1},{slug:'blazer-karol',color:'Camel',size:'S',qty:1}];updateBag();}
+function renderPresent(){
+  document.body.classList.add('presenting');
+  var base=location.pathname;
+  function fr(h){return base+'#/'+h+'&frame';}
+  var deskt=[
+    ['01','Inicio · Mujer','home','1640'],
+    ['02','Inicio · Hombre','home-h','1640'],
+    ['03','Categoría · scroll infinito','shop','1500'],
+    ['04','Producto','producto','1250'],
+    ['05','Carrito','carrito','1000'],
+    ['06','Pago / Checkout','checkout','1500'],
+    ['07','Tiendas','tiendas','1050']
+  ];
+  var mob=[['Inicio (móvil)','home','1500'],['Producto (móvil)','producto','1500'],['Checkout (móvil)','checkout','1700']];
+  var chrome='<div class="chrome"><i></i><i></i><i></i></div>';
+  var deskHtml=deskt.map(d=>'<div class="psec"><div class="lab"><span class="n">'+d[0]+' — Escritorio</span><b>'+d[1]+'</b></div><div class="frame">'+chrome+'<iframe loading="lazy" style="height:'+d[3]+'px" src="'+fr(d[2])+'" onload="fitFrame(this)"></iframe></div></div>').join('');
+  var mobHtml='<div class="psec"><div class="lab"><span class="n">08 — Vista móvil</span><b>Cómo se ve en celular</b></div><div class="pmob">'
+    +mob.map(m=>'<div class="phone"><div class="frame">'+chrome+'<iframe loading="lazy" style="height:'+m[2]+'px" src="'+fr(m[1])+'" onload="fitFrame(this)"></iframe></div><div class="lab" style="margin-top:8px"><span class="n">'+m[0]+'</span></div></div>').join('')
+    +'</div></div>';
+  var wrap=document.createElement('div');wrap.className='presentwrap';wrap.id='presentView';
+  wrap.innerHTML='<div class="pbar"><span class="lg">YHASSIR</span><a onclick="exitPresent()">← Volver a la tienda</a></div>'
+    +'<div class="psec" style="text-align:center;margin-top:30px"><div class="lab"><b style="font-size:28px">Presentación de la tienda</b></div><p style="color:#6f6b64;max-width:60ch;margin:6px auto 0">Toda la web en un solo scroll — así se vería navegando. Desliza para recorrer cada pantalla.</p></div>'
+    +deskHtml+mobHtml
+    +'<div style="text-align:center;padding:40px 0 70px"><a onclick="exitPresent()" style="border:1px solid var(--ink);padding:12px 22px;border-radius:30px;font-size:11px;letter-spacing:.14em;text-transform:uppercase">← Volver a la tienda interactiva</a></div>';
+  document.body.appendChild(wrap);
+  VIEWS.forEach(v=>document.getElementById(v).hidden=true);
+  document.getElementById('hdr').style.display='none';document.getElementById('sitefoot').hidden=true;
+}
+function fitFrame(f){function m(){try{var d=f.contentDocument;if(d&&d.body){var h=Math.max(d.body.scrollHeight,d.documentElement.scrollHeight);if(h>200)f.style.height=h+'px';}}catch(e){}}m();setTimeout(m,900);setTimeout(m,2200);}
+function exitPresent(){location.hash='';location.reload();}
+function isMobFrame(){return location.hash.indexOf('&frame')>=0 && window.innerWidth<520;}
+
+/* ---------- HASH ROUTING ---------- */
+function applyHash(){
+  var h=location.hash||'';
+  if(h.indexOf('present')>=0){renderPresent();return true;}
+  if(h.indexOf('home-h')>=0){setGender('h');return true;}
+  if(h.indexOf('shop-h')>=0){go('shop',{g:'h',cat:null});return true;}
+  if(h.indexOf('shop')>=0){go('shop',{g:'m',cat:null});return true;}
+  if(h.indexOf('producto')>=0){go('product','blazer-karol');return true;}
+  if(h.indexOf('carrito')>=0){seedDemo();go('cart');return true;}
+  if(h.indexOf('checkout')>=0){seedDemo();go('checkout');return true;}
+  if(h.indexOf('tiendas')>=0){go('tiendas');return true;}
+  if(h.indexOf('home')>=0){setGender('m');return true;}
+  return false;
+}
+window.addEventListener('hashchange',function(){location.reload();});
+
 /* ---------- INIT (default Mujer) ---------- */
 setGender('m');
+if(window.self!==window.top){document.body.classList.add('inframe');}
+applyHash();
 </script></body></html>
