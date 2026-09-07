@@ -56,7 +56,7 @@ main{min-height:60vh}
 #homeView.view{padding-top:0}
 #landingView.view{padding-top:0}
 /* ===== LANDING / PORTADA (Hombre + Mujer) ===== */
-.landing{display:grid;grid-template-columns:1fr 1fr;height:100vh;min-height:560px}
+.landing{display:grid;grid-template-columns:1fr 1fr;height:84vh;min-height:460px;max-height:820px}
 .lhalf{position:relative;overflow:hidden;cursor:pointer;background:var(--soft)}
 .lhalf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:1.3s ease}
 .lhalf:hover img{transform:scale(1.05)}
@@ -65,7 +65,7 @@ main{min-height:60vh}
 .lhalf .ov h2{font-family:var(--serif);font-size:clamp(32px,4.2vw,58px);font-weight:500;letter-spacing:.05em}
 .lhalf .ov .go{font-size:11px;letter-spacing:.24em;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:4px}
 /* ===== HERO ===== */
-.hero{position:relative;height:100vh;min-height:560px;background:var(--soft);overflow:hidden}
+.hero{position:relative;height:74vh;min-height:480px;max-height:760px;background:var(--soft);overflow:hidden}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero .ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 40px clamp(46px,9vh,90px);background:linear-gradient(180deg,rgba(0,0,0,.12) 0,rgba(0,0,0,0) 34%,rgba(0,0,0,.46) 100%);color:#fff}
 .hero .ov .k{color:rgba(255,255,255,.85)}
@@ -353,8 +353,19 @@ footer .fbot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 .pmob .phone .frame{border-radius:22px}
 .pmob .phone .lab{text-align:center}
 body.presenting .seeall{display:none}
-body.inframe .hero{height:600px;min-height:0}
-body.inframe .seeall{display:none}
+body.inframe .hero{height:520px;min-height:0;max-height:none}
+body.inframe .seeall,body.inframe .wafloat{display:none}
+/* WhatsApp flotante */
+.wafloat{position:fixed;left:18px;bottom:18px;z-index:80;width:52px;height:52px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.22)}
+.wafloat svg{width:28px;height:28px;fill:#fff}
+body.presenting .wafloat{display:none}
+/* Explorar más (categoría) */
+.exmore{border-top:1px solid var(--line);margin-top:14px;padding:46px 0 76px;text-align:center}
+.exmore .k{margin-bottom:14px}
+.exrow{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.exrow a{font-family:var(--serif);font-size:19px;color:var(--ink);border-bottom:1px solid transparent;padding-bottom:2px}
+.exrow a:hover{border-color:var(--ink)}
+.expar{max-width:70ch;margin:0 auto;color:var(--sub);font-size:13.5px;line-height:1.7}
 </style></head>
 <body>
 <header id="hdr" class="trans">
@@ -369,6 +380,7 @@ body.inframe .seeall{display:none}
   <div class="tools">
     <span class="ic" onclick="openSearch()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span class="txt">Buscar</span></span>
     <span class="ic" onclick="toast('Mi cuenta · demostración')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span class="txt">Cuenta</span></span>
+    <span class="ic" onclick="toast('Lista de deseos · demostración')"><svg viewBox="0 0 24 24"><path d="M12 20s-6.5-4.3-9-8C1.4 9.3 3 6.2 6 6.2c1.7 0 3 1 3.9 2.2C10.9 7.2 12.2 6.2 14 6.2c3 0 4.6 3.1 3 5.8-2.5 3.7-9 8-9 8z"/></svg></span>
     <span class="ic bagcount" onclick="go('cart')"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><b id="bagN">0</b></span>
   </div>
  </div>
@@ -421,6 +433,7 @@ body.inframe .seeall{display:none}
  <div class="gtabs"><button id="mtM" class="on" onclick="mMenuGender('m')">Mujer</button><button id="mtH" onclick="mMenuGender('h')">Hombre</button></div>
  <nav id="mmNav"></nav>
 </div>
+<a class="wafloat" id="wafloat" href="https://wa.me/51999000000" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.3 4.8 4.9-1.3A9.9 9.9 0 1 0 12 2zm5.3 13.9c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-1.9 1-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.6.8 2 .9 2.1.1.1.1.3 0 .5-.1.2-.1.3-.3.5-.1.1-.3.3-.4.5-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.2.1.4.2.4.3.1.1.1.6-.1 1.2z"/></svg></a>
 <button class="seeall" id="seeall" onclick="location.hash='#present'">▤ Ver toda la web</button>
 <div class="toast" id="toast"></div>
 <script>
@@ -511,6 +524,7 @@ function renderHome(){
   +'</section>'
   +'<section class="block wrap"><div class="shead"><div><div class="k">Novedades</div><h2 class="serif">Últimos ingresos</h2></div><a class="link" onclick="go(\'shop\',{g:\''+g+'\',cat:null})">Ver todo</a></div>'
     +'<div class="carowrap"><button class="arw l" onclick="scrollCaro(-1)">‹</button><div class="caro" id="homeCaro">'+cards+'</div><button class="arw r" onclick="scrollCaro(1)">›</button></div>'
+    +'<div style="text-align:center;margin-top:34px"><a class="btn" onclick="go(\'shop\',{g:\''+g+'\',cat:null})">Ver más</a></div>'
   +'</section>';
   document.getElementById('homeView').innerHTML=h;
 }
@@ -533,6 +547,9 @@ function renderShop(g,cat){
     +'<div class="filtcol" id="filtCol"><div class="grp"><h5>Talla</h5><div class="opts" id="fSizes"></div></div><div class="grp"><h5>Color</h5><div class="opts" id="fColors"></div></div><div class="grp" style="align-self:flex-end"><button class="chipbtn" onclick="clearFilters()">Limpiar</button></div></div>'
     +'<div class="pgrid" id="shopGrid"></div>'
     +'<div class="sentinel" id="sentinel"></div>'
+    +'<div class="exmore"><div class="k">Explorar más</div><div class="exrow">'
+      +cats.filter(c=>c!==cat).map(c=>'<a onclick="go(\'shop\',{g:\''+g+'\',cat:\''+c+'\'})">'+c+'</a>').join('')
+      +'</div><p class="expar">Moda peruana de autor con más de 25 años de historia. Cada prenda se confecciona en Gamarra con telas seleccionadas y acabados cuidados, pensada para acompañar tu día a día con carácter y comodidad.</p></div>'
   +'</div>';
   var v=document.getElementById('shopView'); v.innerHTML=h;
   buildFilters(); buildList(); 
@@ -643,15 +660,15 @@ function renderCheckout(){
   var tot=cartTotal();
   var h='<div class="checkout co"><div class="co-form">'
    +'<div style="text-align:center;margin-bottom:20px"><span class="logo" style="font-size:22px">YHASSIR</span></div>'
-   +'<h2>Contacto</h2><div class="field"><input type="email" placeholder="Correo electrónico"></div>'
+   +'<div style="display:flex;justify-content:space-between;align-items:center"><h2>Contacto</h2><a style="font-size:12px;color:var(--sub);text-decoration:underline" onclick="toast(\'Iniciar sesión · demostración\')">Iniciar sesión</a></div><div class="field"><input type="email" placeholder="Correo electrónico"></div><label style="display:flex;gap:8px;font-size:12px;color:var(--sub);margin-bottom:4px"><input type="checkbox" checked> Enviarme novedades y ofertas por correo</label>'
    +'<h2>Entrega</h2><div class="toggle"><button id="dEnvio" class="on" onclick="coDel(\'envio\')">Envío</button><button id="dRetiro" onclick="coDel(\'retiro\')">Retiro en tienda</button></div>'
    +'<div id="delFields"><div class="field"><label>País / Región</label><select><option>Perú</option></select></div>'
    +'<div class="row2"><div class="field"><label>Nombre</label><input></div><div class="field"><label>Apellidos</label><input></div></div>'
    +'<div class="field"><label>DNI / C.E.</label><input></div>'
    +'<div class="field"><label>Dirección completa</label><input></div>'
    +'<div class="field"><label>Distrito</label><input></div>'
-   +'<div class="row2"><div class="field"><label>Ciudad</label><input value="Lima"></div><div class="field"><label>Departamento</label><input value="Lima"></div></div>'
-   +'<div class="field"><label>Teléfono</label><input></div></div>'
+   +'<div class="row3"><div class="field"><label>Ciudad</label><input value="Lima"></div><div class="field"><label>Departamento</label><input value="Lima Metropolitana"></div><div class="field"><label>Cód. postal (opcional)</label><input></div></div>'
+   +'<div class="field"><label>Teléfono</label><input></div><label style="display:flex;gap:8px;font-size:12px;color:var(--sub)"><input type="checkbox"> Guardar mi información para la próxima vez</label></div>'
    +'<h2>Métodos de envío</h2>'
    +'<div class="optbox on" onclick="pickShip(this)"><span>FREE · Lima Metropolitana (compras &gt; S/500)</span><span class="rt">GRATIS</span></div>'
    +'<div class="optbox" onclick="pickShip(this)"><span>Regular · Lima Metropolitana (3–5 días)</span><span class="rt">S/ 12.00</span></div>'
@@ -662,7 +679,7 @@ function renderCheckout(){
    +'<div class="optbox" data-p="izipay" onclick="pickPay(this)"><span>Izipay</span><span class="paylogos"><span>IZIPAY</span></span></div>'
    +'<div class="optbox" data-p="yape" onclick="pickPay(this)"><span>Yape · PagoEfectivo · Mercado Pago</span><span class="paylogos"><span>YAPE</span><span>MP</span></span></div>'
    +'<div class="optbox" data-p="transfer" onclick="pickPay(this)"><span>Yape o Transferencia</span><span class="paylogos"><span>YAPE</span></span></div>'
-   +'<h2>Dirección de facturación</h2><div class="optbox on"><span>La misma dirección de envío</span></div>'
+   +'<h2>Dirección de facturación</h2><div class="optbox on" data-bill onclick="pickBill(this)"><span>La misma dirección de envío</span></div><div class="optbox" data-bill onclick="pickBill(this)"><span>Usar una dirección de facturación distinta</span></div>'
    +'<button class="btn dark full" style="height:56px;margin-top:20px" onclick="pagarAhora()">Pagar ahora</button>'
    +'<p style="text-align:center;font-size:11px;color:var(--sub);margin-top:14px">Demostración — no se procesa ningún cobro real.</p>'
    +'</div>'
@@ -682,6 +699,7 @@ function shipGroup(el){ // clear siblings that are shipping options (between Mé
   sibs.forEach(s=>s.classList.remove('on'));el.classList.add('on');
 }
 function pickPay(el){document.querySelectorAll('.optbox[data-p]').forEach(x=>x.classList.remove('on'));el.classList.add('on');coPay=el.dataset.p;}
+function pickBill(el){document.querySelectorAll('.optbox[data-bill]').forEach(x=>x.classList.remove('on'));el.classList.add('on');}
 function pagarAhora(){var n=bagCount();var t=cartTotal();CART=[];updateBag();document.getElementById('confirmView').innerHTML='<div class="confirm"><div class="ok">✓</div><h1 class="serif">¡Gracias por tu compra!</h1><p style="color:var(--sub)">Tu pedido de '+n+' artículo(s) por '+money(t>=500?t:t+12)+' fue recibido.<br>Te contactaremos por WhatsApp para coordinar el pago y la entrega.</p><br><p style="font-size:11px;color:var(--sub)">Demostración — no se realizó ningún cobro.</p><br><button class="btn dark" onclick="go(\'home\')">Volver a la tienda</button></div>';go('confirm');}
 
 /* ---------- TIENDAS ---------- */
@@ -746,7 +764,7 @@ function go(view,arg){
   else if(view==='tiendas'){renderTiendas();showView('tiendasView');headerMode(false);foot(true);}
 }
 /* header solid on scroll over hero */
-function onScroll(){var h=document.getElementById('hdr');if(!document.getElementById('homeView').hidden){if(window.scrollY>window.innerHeight-90)h.classList.remove('trans');else h.classList.add('trans');}}
+function onScroll(){var h=document.getElementById('hdr');var onHome=!document.getElementById('homeView').hidden,onLand=!document.getElementById('landingView').hidden;if(onHome){if(window.scrollY>window.innerHeight*0.58)h.classList.remove('trans');else h.classList.add('trans');}else if(onLand){h.classList.add('trans');}}
 window.addEventListener('scroll',onScroll,{passive:true});
 
 /* ---------- PRESENTACIÓN (toda la web en un scroll) ---------- */
