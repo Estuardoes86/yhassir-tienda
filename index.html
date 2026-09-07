@@ -54,6 +54,16 @@ header.trans .bagcount b{background:#fff;color:#111}
 main{min-height:60vh}
 .view{padding-top:var(--hd)}
 #homeView.view{padding-top:0}
+#landingView.view{padding-top:0}
+/* ===== LANDING / PORTADA (Hombre + Mujer) ===== */
+.landing{display:grid;grid-template-columns:1fr 1fr;height:100vh;min-height:560px}
+.lhalf{position:relative;overflow:hidden;cursor:pointer;background:var(--soft)}
+.lhalf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:1.3s ease}
+.lhalf:hover img{transform:scale(1.05)}
+.lhalf .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.14),rgba(0,0,0,.42));display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;gap:12px;transition:.3s}
+.lhalf:hover .ov{background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.5))}
+.lhalf .ov h2{font-family:var(--serif);font-size:clamp(32px,4.2vw,58px);font-weight:500;letter-spacing:.05em}
+.lhalf .ov .go{font-size:11px;letter-spacing:.24em;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:4px}
 /* ===== HERO ===== */
 .hero{position:relative;height:100vh;min-height:560px;background:var(--soft);overflow:hidden}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -302,6 +312,8 @@ footer .fbot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
  .tools .txt{display:none}
  .logo{font-size:21px}
  .hero .ov{padding:0 24px 60px}
+ .landing{grid-template-columns:1fr;height:auto}
+ .lhalf{height:56vh;min-height:340px}
  .twoblk{grid-template-columns:1fr}
  .pd .layout{grid-template-columns:1fr;gap:0}
  .gallery{grid-template-columns:1fr}
@@ -353,7 +365,7 @@ body.inframe .seeall{display:none}
     <a id="gH" onmouseenter="mega('h')" onmouseleave="megaHide()" onclick="setGender('h')">Hombre</a>
     <a onclick="go('tiendas')">Tiendas</a>
   </div>
-  <a class="logo" onclick="go('home')">YHASSIR</a>
+  <a class="logo" onclick="go('landing')">YHASSIR</a>
   <div class="tools">
     <span class="ic" onclick="openSearch()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span class="txt">Buscar</span></span>
     <span class="ic" onclick="toast('Mi cuenta · demostración')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span class="txt">Cuenta</span></span>
@@ -363,6 +375,7 @@ body.inframe .seeall{display:none}
  <div class="mega" id="megaEl" onmouseenter="megaKeep()" onmouseleave="megaHide()"><div class="inner" id="megaInner"></div></div>
 </header>
 
+<main id="landingView" class="view" hidden></main>
 <main id="homeView" class="view"></main>
 <main id="shopView" class="view" hidden></main>
 <main id="prodView" class="view pd" hidden></main>
@@ -468,6 +481,14 @@ function pcar(btn,dir){
   var n=track.children.length, i=(+card.dataset.i||0)+dir; if(i<0)i=n-1; if(i>=n)i=0;
   card.dataset.i=i; track.style.transform='translateX(-'+(i*100)+'%)';
   ph.querySelectorAll('.pdots i').forEach((d,k)=>d.classList.toggle('on',k===i));
+}
+
+/* ---------- LANDING / PORTADA ---------- */
+function renderLanding(){
+  document.getElementById('landingView').innerHTML='<div class="landing">'
+   +'<div class="lhalf" onclick="setGender(\'m\')"><img src="'+LIFE.m+'" alt="Mujer"><div class="ov"><div class="k" style="color:rgba(255,255,255,.85)">Colección</div><h2 class="serif">Mujer</h2><span class="go">Entrar →</span></div></div>'
+   +'<div class="lhalf" onclick="setGender(\'h\')"><img src="'+LIFE.h+'" alt="Hombre"><div class="ov"><div class="k" style="color:rgba(255,255,255,.85)">Colección</div><h2 class="serif">Hombre</h2><span class="go">Entrar →</span></div></div>'
+   +'</div>';
 }
 
 /* ---------- HOME ---------- */
@@ -707,13 +728,14 @@ function closeAll(){closeSearch();closeMenu();}
 function setGender(g){G=g;document.getElementById('gM').classList.toggle('on',g==='m');document.getElementById('gH').classList.toggle('on',g==='h');renderHome();go('home');}
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2200);}
 function subscribe(e){e.preventDefault();e.target.reset();toast('¡Suscripción registrada!');}
-var VIEWS=['homeView','shopView','prodView','cartView','coView','tiendasView','confirmView'];
+var VIEWS=['landingView','homeView','shopView','prodView','cartView','coView','tiendasView','confirmView'];
 function showView(id){VIEWS.forEach(v=>document.getElementById(v).hidden=(v!==id));document.getElementById('stickybar').classList.remove('show');window.scrollTo(0,0);}
 function headerMode(transparent){var h=document.getElementById('hdr');if(transparent){h.classList.add('trans');}else{h.classList.remove('trans');}}
 function foot(show){document.getElementById('sitefoot').hidden=!show;}
 function go(view,arg){
   closeAll();
-  if(view==='home'){renderHome();showView('homeView');headerMode(true);foot(true);}
+  if(view==='landing'){renderLanding();showView('landingView');headerMode(true);foot(false);}
+  else if(view==='home'){renderHome();showView('homeView');headerMode(true);foot(true);}
   else if(view==='gender'){G=arg;setGender(arg);}
   else if(view==='shop'){var g=arg&&arg.g?arg.g:G;var cat=arg?arg.cat:null;G=g;document.getElementById('gM').classList.toggle('on',g==='m');document.getElementById('gH').classList.toggle('on',g==='h');renderShop(g,cat);showView('shopView');headerMode(false);foot(true);}
   else if(view==='product'){renderProduct(arg);showView('prodView');headerMode(false);foot(true);}
@@ -734,15 +756,16 @@ function renderPresent(){
   var base=location.pathname;
   function fr(h){return base+'#/'+h+'&frame';}
   var deskt=[
-    ['01','Inicio · Mujer','home','1640'],
-    ['02','Inicio · Hombre','home-h','1640'],
+    ['00','Portada · elige Hombre o Mujer','portada','820'],
+    ['01','Web MUJER · Inicio completo','home','1640'],
+    ['02','Web HOMBRE · Inicio completo','home-h','1640'],
     ['03','Categoría · scroll infinito','shop','1500'],
     ['04','Producto','producto','1250'],
     ['05','Carrito','carrito','1000'],
     ['06','Pago / Checkout','checkout','1500'],
     ['07','Tiendas','tiendas','1050']
   ];
-  var mob=[['Inicio (móvil)','home','1500'],['Producto (móvil)','producto','1500'],['Checkout (móvil)','checkout','1700']];
+  var mob=[['Portada (móvil)','portada','1200'],['Inicio Mujer (móvil)','home','1500'],['Producto (móvil)','producto','1500'],['Checkout (móvil)','checkout','1700']];
   var chrome='<div class="chrome"><i></i><i></i><i></i></div>';
   var deskHtml=deskt.map(d=>'<div class="psec"><div class="lab"><span class="n">'+d[0]+' — Escritorio</span><b>'+d[1]+'</b></div><div class="frame">'+chrome+'<iframe loading="lazy" style="height:'+d[3]+'px" src="'+fr(d[2])+'" onload="fitFrame(this)"></iframe></div></div>').join('');
   var mobHtml='<div class="psec"><div class="lab"><span class="n">08 — Vista móvil</span><b>Cómo se ve en celular</b></div><div class="pmob">'
@@ -765,6 +788,7 @@ function isMobFrame(){return location.hash.indexOf('&frame')>=0 && window.innerW
 function applyHash(){
   var h=location.hash||'';
   if(h.indexOf('present')>=0){renderPresent();return true;}
+  if(h.indexOf('portada')>=0||h.indexOf('landing')>=0){go('landing');return true;}
   if(h.indexOf('home-h')>=0){setGender('h');return true;}
   if(h.indexOf('shop-h')>=0){go('shop',{g:'h',cat:null});return true;}
   if(h.indexOf('shop')>=0){go('shop',{g:'m',cat:null});return true;}
@@ -777,8 +801,9 @@ function applyHash(){
 }
 window.addEventListener('hashchange',function(){location.reload();});
 
-/* ---------- INIT (default Mujer) ---------- */
+/* ---------- INIT (portada Hombre + Mujer) ---------- */
 setGender('m');
+go('landing');
 if(window.self!==window.top){document.body.classList.add('inframe');}
 applyHash();
 </script></body></html>
