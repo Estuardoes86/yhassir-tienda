@@ -464,9 +464,14 @@ function gallery(p){return imgsFor(p);}
 var G='m';                 // active gender, default Mujer
 var CART=[];               // {slug,color,size,qty}
 var pdSel={slug:null,color:0,size:null};
-var CATORDER={m:['Vestidos','Blusas','Blazers','Conjuntos','Polos','Pantalones'],h:['Camisas','Polos','Pantalones','Shorts']};
-function catsFor(g){var have=[...new Set(P.filter(p=>p.g===g).map(p=>p.cat))];var ord=CATORDER[g]||[];return ord.filter(c=>have.includes(c)).concat(have.filter(c=>!ord.includes(c)));}
-function catThumb(g,cat){var p=P.find(x=>x.g===g&&x.cat===cat);return p?p.img:LIFE[g];}
+/* Taxonomía del PDF -> categorías reales de datos */
+var CHIPMAP={
+ m:{'Vestidos':['Vestidos'],'Bolsos':[],'Tops & Camisas':['Blusas','Polos'],'Chaquetas':['Blazers'],'Pantalones & Jeans':['Pantalones','Conjuntos'],'Faldas & Shorts':[]},
+ h:{'Camisas':['Camisas'],'Polos':['Polos'],'Pantalones & Jeans':['Pantalones'],'Shorts':['Shorts']}
+};
+function realCats(g,label){return CHIPMAP[g].hasOwnProperty(label)?CHIPMAP[g][label]:[label];}
+function catsFor(g){return Object.keys(CHIPMAP[g]);}
+function catThumb(g,label){var reals=realCats(g,label);for(var i=0;i<reals.length;i++){var p=P.find(x=>x.g===g&&x.cat===reals[i]);if(p)return p.img;}return LIFE[g];}
 function prodBySlug(s){return P.find(p=>p.slug===s);}
 function bagCount(){return CART.reduce((a,c)=>a+c.qty,0);}
 function updateBag(){document.getElementById('bagN').textContent=bagCount();}
@@ -556,7 +561,8 @@ function renderShop(g,cat){
 }
 function baseList(){
   var g=shopState.g,cat=shopState.cat;
-  var arr=P.filter(p=>p.g===g&&(!cat||p.cat===cat));
+  var reals=cat?realCats(g,cat):null;
+  var arr=P.filter(p=>p.g===g&&(!cat||reals.includes(p.cat)));
   // filters
   if(shopState.sizes.length) arr=arr.filter(p=>p.sizes.some(s=>shopState.sizes.includes(s[0])&&s[1]));
   if(shopState.colors.length) arr=arr.filter(p=>p.colors.some(c=>shopState.colors.includes(c[0])));
@@ -567,6 +573,8 @@ function baseList(){
 }
 function buildList(){
   var arr=baseList();
+  if(!arr.length){document.getElementById('shopGrid').innerHTML='';document.getElementById('shopCnt').textContent='0 productos';if(shopState.io)shopState.io.disconnect();document.getElementById('sentinel').innerHTML='<div style="text-align:center;padding:50px 0"><p class="serif" style="font-size:24px">Muy pronto</p><p style="color:var(--sub);font-size:13px;margin-top:6px">Estamos preparando esta categoría para ti.</p></div>';return;}
+  document.getElementById('sentinel').innerHTML='';
   // simulate "infinite" catalog by cycling until ~24 (or keep as-is if empty)
   var full=[]; if(arr.length){ while(full.length<Math.max(24,arr.length)){ full=full.concat(arr);} }
   shopState.list=full; shopState.shown=0;
@@ -588,7 +596,7 @@ function loadMore(){
 function pickCat(g,cat){ go('shop',{g:g,cat:cat}); }
 function toggleFilters(){document.getElementById('filtCol').classList.toggle('open');}
 function buildFilters(){
-  var g=shopState.g,cat=shopState.cat;var arr=P.filter(p=>p.g===g&&(!cat||p.cat===cat));
+  var g=shopState.g,cat=shopState.cat;var reals=cat?realCats(g,cat):null;var arr=P.filter(p=>p.g===g&&(!cat||reals.includes(p.cat)));
   var sizes=[...new Set(arr.flatMap(p=>p.sizes.map(s=>s[0])))];
   var cols=[]; arr.forEach(p=>p.colors.forEach(c=>{if(!cols.find(x=>x[0]===c[0]))cols.push(c);}));
   document.getElementById('fSizes').innerHTML=sizes.map(s=>'<span class="o" onclick="toggleF(this,\'sizes\',\''+s+'\')">'+s+'</span>').join('');
