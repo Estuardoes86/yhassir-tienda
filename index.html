@@ -376,7 +376,7 @@ body.presenting .wafloat{display:none}
     <a id="gH" onmouseenter="mega('h')" onmouseleave="megaHide()" onclick="setGender('h')">Hombre</a>
     <a onclick="go('tiendas')">Tiendas</a>
   </div>
-  <a class="logo" onclick="go('landing')">YHASSIR</a>
+  <a class="logo" onclick="go('home')">YHASSIR</a>
   <div class="tools">
     <span class="ic" onclick="openSearch()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span class="txt">Buscar</span></span>
     <span class="ic" onclick="toast('Mi cuenta · demostración')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span class="txt">Cuenta</span></span>
@@ -774,16 +774,15 @@ function renderPresent(){
   var base=location.pathname;
   function fr(h){return base+'#/'+h+'&frame';}
   var deskt=[
-    ['00','Portada · elige Hombre o Mujer','portada','820'],
-    ['01','Web MUJER · Inicio completo','home','1640'],
-    ['02','Web HOMBRE · Inicio completo','home-h','1640'],
+    ['01','Inicio MUJER (menú Hombre/Mujer arriba)','home','1640'],
+    ['02','Inicio HOMBRE','home-h','1640'],
     ['03','Categoría · scroll infinito','shop','1500'],
     ['04','Producto','producto','1250'],
     ['05','Carrito','carrito','1000'],
     ['06','Pago / Checkout','checkout','1500'],
     ['07','Tiendas','tiendas','1050']
   ];
-  var mob=[['Portada (móvil)','portada','1200'],['Inicio Mujer (móvil)','home','1500'],['Producto (móvil)','producto','1500'],['Checkout (móvil)','checkout','1700']];
+  var mob=[['Inicio Mujer (móvil)','home','1500'],['Producto (móvil)','producto','1500'],['Checkout (móvil)','checkout','1700']];
   var chrome='<div class="chrome"><i></i><i></i><i></i></div>';
   var deskHtml=deskt.map(d=>'<div class="psec"><div class="lab"><span class="n">'+d[0]+' — Escritorio</span><b>'+d[1]+'</b></div><div class="frame">'+chrome+'<iframe loading="lazy" style="height:'+d[3]+'px" src="'+fr(d[2])+'" onload="fitFrame(this)"></iframe></div></div>').join('');
   var mobHtml='<div class="psec"><div class="lab"><span class="n">08 — Vista móvil</span><b>Cómo se ve en celular</b></div><div class="pmob">'
@@ -819,9 +818,9 @@ function applyHash(){
 }
 window.addEventListener('hashchange',function(){location.reload();});
 
-/* ---------- INIT (portada Hombre + Mujer) ---------- */
+/* ---------- INIT (directo a la tienda Mujer, menú Hombre/Mujer arriba) ---------- */
 setGender('m');
-go('landing');
+go('home');
 if(window.self!==window.top){document.body.classList.add('inframe');}
 applyHash();
 </script></body></html>
